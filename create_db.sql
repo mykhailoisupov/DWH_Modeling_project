@@ -1,6 +1,6 @@
 CREATE DATABASE shop_dwh;
 
-USE shop_db;
+USE shop_dwh;
 
 DROP TABLE IF EXISTS Customers, Categories, Products, Orders, OrderItems;
 
@@ -47,19 +47,3 @@ CREATE TABLE OrderItems (
     FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
-
-SET FOREIGN_KEY_CHECKS = 0;
-
-TRUNCATE Customers;
-TRUNCATE Categories;
-TRUNCATE Products;
-TRUNCATE Orders;
-TRUNCATE OrderItems;
-
-SET FOREIGN_KEY_CHECKS = 1;
-
-SELECT COUNT(*) FROM Customers;
-SELECT COUNT(*) FROM Categories;
-SELECT COUNT(*) FROM Orders;
-SELECT COUNT(*) FROM OrderItems;
-
