@@ -175,10 +175,10 @@ if __name__ == "__main__":
         user="root",
         password="MySQL_Student123",
         database="shop_db",
-        num_customers=100_0000,
-        num_categories=10,
-        num_products=1_000_000,
-        num_orders=3_000_000,
-        num_order_items=10_000_000,
+        num_customers=1000,
+        num_categories=4,
+        num_products=10_000,
+        num_orders=30_000,
+        num_order_items=100_000,
         batch_size=5_000
     )
