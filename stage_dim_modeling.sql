@@ -1,7 +1,5 @@
 USE shop_dwh;
 
-DROP TABLE dim_customer, fact_sales;
-
 CREATE TABLE dim_date AS
 SELECT DISTINCT CAST(order_date AS DATE) AS date_key,
                 YEAR(order_date)         AS year,
