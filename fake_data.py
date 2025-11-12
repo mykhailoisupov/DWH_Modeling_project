@@ -95,7 +95,7 @@ def insert_fake_data(
 
     # Insert Customers
     customer_query = """
-        INSERT INTO Customers
+        INSERT INTO raw_customers
         (first_name, last_name, email, city, registration_date, is_premium)
         VALUES (%s, %s, %s, %s, %s, %s)
     """
@@ -106,11 +106,11 @@ def insert_fake_data(
         print(f"Inserted {min(i + batch_size, num_customers)} / {num_customers} customers")
 
     # Get customer IDs
-    customer_ids = get_existing_ids(cursor, 'Customers', 'customer_id')
+    customer_ids = get_existing_ids(cursor, 'raw_customers', 'customer_id')
 
     # Insert Categories
     category_query = """
-        INSERT INTO Categories
+        INSERT INTO raw_categories
         (category_name)
         VALUES (%s)
     """
@@ -121,11 +121,11 @@ def insert_fake_data(
         print(f"Inserted {min(i + batch_size, num_categories)} / {num_categories} categories")
 
     # Get category IDs
-    category_ids = get_existing_ids(cursor, 'Categories', 'category_id')
+    category_ids = get_existing_ids(cursor, 'raw_categories', 'category_id')
 
     # Insert Products
     product_query = """
-        INSERT INTO Products
+        INSERT INTO raw_products
         (product_name, category_id, price, stock_quantity, supplier_id)
         VALUES (%s, %s, %s, %s, %s)
     """
@@ -136,11 +136,11 @@ def insert_fake_data(
         print(f"Inserted {min(i + batch_size, num_products)} / {num_products} products")
 
     # Get product IDs
-    product_ids = get_existing_ids(cursor, 'Products', 'product_id')
+    product_ids = get_existing_ids(cursor, 'raw_products', 'product_id')
 
     # Insert Orders
     order_query = """
-        INSERT INTO Orders
+        INSERT INTO raw_orders
         (customer_id, order_date, total_amount, status)
         VALUES (%s, %s, %s, %s)
     """
@@ -151,11 +151,11 @@ def insert_fake_data(
         print(f"Inserted {min(i + batch_size, num_orders)} / {num_orders} orders")
 
     # Get order IDs
-    order_ids = get_existing_ids(cursor, 'Orders', 'order_id')
+    order_ids = get_existing_ids(cursor, 'raw_orders', 'order_id')
 
     # Insert OrderItems
     order_item_query = """
-        INSERT INTO OrderItems
+        INSERT INTO raw_order_items
         (order_id, product_id, quantity, unit_price)
         VALUES (%s, %s, %s, %s)
     """
@@ -174,7 +174,7 @@ if __name__ == "__main__":
         host="localhost",
         user="root",
         password="MySQL_Student123",
-        database="shop_db",
+        database="shop_dwh",
         num_customers=1000,
         num_categories=4,
         num_products=10_000,
