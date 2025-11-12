@@ -1,47 +1,44 @@
-CREATE DATABASE shop_dwh;
+-- 1. Create the dataset (equivalent to MySQL's DATABASE)
+CREATE SCHEMA shop_dwh;
 
-USE shop_dwh;
+-- 2. Create the tables within the dataset
 
-CREATE TABLE raw_customers (
-    customer_id INT PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    email VARCHAR(100) UNIQUE,
-    city VARCHAR(50),
+CREATE TABLE shop_dwh.raw_customers (
+    customer_id INT64,
+    first_name STRING,
+    last_name STRING,
+    email STRING,
+    city STRING,
     registration_date DATE,
-    is_premium BOOLEAN
+    is_premium BOOL
 );
 
-CREATE TABLE raw_categories (
-    category_id INT PRIMARY KEY AUTO_INCREMENT,
-    category_name VARCHAR(50)
+CREATE TABLE shop_dwh.raw_categories (
+    category_id INT64,
+    category_name STRING
 );
 
-CREATE TABLE raw_products (
-    product_id INT PRIMARY KEY AUTO_INCREMENT,
-    product_name VARCHAR(100),
-    category_id INT,
-    price DECIMAL(10, 2),
-    stock_quantity INT,
-    supplier_id INT,
-    FOREIGN KEY (category_id) REFERENCES raw_categories(category_id)
+CREATE TABLE shop_dwh.raw_products (
+    product_id INT64,
+    product_name STRING,
+    category_id INT64,
+    price NUMERIC,
+    stock_quantity INT64,
+    supplier_id INT64
 );
 
-CREATE TABLE raw_orders (
-    order_id INT PRIMARY KEY AUTO_INCREMENT,
-    customer_id INT,
+CREATE TABLE shop_dwh.raw_orders (
+    order_id INT64,
+    customer_id INT64,
     order_date DATETIME,
-    total_amount DECIMAL(10, 2),
-    status VARCHAR(20),
-    FOREIGN KEY (customer_id) REFERENCES raw_customers(customer_id)
+    total_amount NUMERIC,
+    status STRING
 );
 
-CREATE TABLE raw_order_items (
-    item_id INT PRIMARY KEY AUTO_INCREMENT,
-    order_id INT,
-    product_id INT,
-    quantity INT,
-    unit_price DECIMAL(10, 2),
-    FOREIGN KEY (order_id) REFERENCES raw_orders(order_id),
-    FOREIGN KEY (product_id) REFERENCES raw_products(product_id)
+CREATE TABLE shop_dwh.raw_order_items (
+    item_id INT64,
+    order_id INT64,
+    product_id INT64,
+    quantity INT64,
+    unit_price NUMERIC
 );
